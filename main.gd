@@ -1,24 +1,38 @@
 extends Node
 
+@export_category("Game Config")
+@export var prueba: int
+
+@export_category("Scenes")
 @export var mob_scene: PackedScene
+@export var coin_scene: PackedScene
+
+
 var score
+var monedas
 
 func game_over():
 	$DeathSound.play()
 	$ScoreTimer.stop()
 	$MobTimer.stop()
+	$CoinTimer.stop()
 	$Music.stop()
 	$HUD.show_game_over()
 
 func new_game():
+	var player = get_node("Player")
+	player.coinpicked.connect(_on_player_coinpicked)
 	get_tree().call_group("mobs", "queue_free")
+	get_tree().call_group("coins", "queue_free")
 	$Music.play()
 	score = 0
+	monedas = 0
 	$Player.start($StartPosition.position)
 	$Player.set_process(true)
 	$StartTimer.start()
 	$HUD.update_score(score)
 	$HUD.show_message("Get Ready")
+	$HUD.update_coins(monedas)
 
 func _on_ScoreTimer_timeout():
 	score += 1
@@ -27,6 +41,8 @@ func _on_ScoreTimer_timeout():
 func _on_StartTimer_timeout():
 	$MobTimer.start()
 	$ScoreTimer.start()
+	$CoinTimer.start()
+	var screenSize = get_viewport().get_visible_rect().size
 	
 func _on_MobTimer_timeout():
 	# Create a new instance of the Mob scene.
@@ -50,3 +66,20 @@ func _on_MobTimer_timeout():
 func _ready():
 	#new_game()
 	pass
+
+
+func _on_coin_timer_timeout():
+	var coin = coin_scene.instantiate()
+	var screenSize = get_viewport().get_visible_rect().size
+	var rng = RandomNumberGenerator.new()
+	var rndX = rng.randi_range(0, screenSize.x)
+	var rndY = rng.randi_range(0, screenSize.y)
+	coin.position = Vector2(rndX, rndY)
+	add_child(coin)
+
+func _on_player_coinpicked(_moneda):
+	$CoinPickedSound.play()
+	monedas += 1
+	$HUD.update_coins(monedas)
+	_moneda.free()
+	

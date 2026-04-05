@@ -3,6 +3,7 @@ extends Area2D
 
 var screen_size # Size of the game window.
 signal hit
+signal coinpicked(moneda)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -40,16 +41,19 @@ func _process(delta):
 		$AnimatedSprite2D.flip_v = velocity.y > 0
 
 func _on_body_entered(_body):
-	hit.emit()
-	set_process(false)
-	for n in 3:
-		hide() # Player disappears after being hit.
-		await get_tree().create_timer(0.3).timeout
-		show()
-		await get_tree().create_timer(0.3).timeout
-	hide()
-	# Must be deferred as we can't change physics properties on a physics callback.
-	$CollisionShape2D.set_deferred(&"disabled", true)
+	if _body.is_in_group("mobs"):
+		hit.emit()
+		set_process(false)
+		for n in 3:
+			hide() # Player disappears after being hit.
+			await get_tree().create_timer(0.3).timeout
+			show()
+			await get_tree().create_timer(0.3).timeout
+		hide()
+		# Must be deferred as we can't change physics properties on a physics callback.
+		$CollisionShape2D.set_deferred(&"disabled", true)
+	elif _body.is_in_group("coins"):
+		coinpicked.emit(_body)
 
 func start(pos):
 	position = pos
