@@ -84,7 +84,7 @@ shortcut_in_tooltip = false
 text = "Ranking"
 
 [node name="MessageTimer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 3.0
 
 [node name="CoinLabel" type="Label" parent="."]
 offset_left = 439.0
@@ -101,6 +101,50 @@ position = Vector2(411, 25)
 scale = Vector2(2, 2)
 texture = ExtResource("3_q4civ")
 hframes = 5
+
+[node name="Summary" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Summary"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -81.0
+offset_top = -98.0
+offset_right = 81.0
+offset_bottom = 98.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="lblScoreTitulo" type="Label" parent="Summary/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("1_lg6lf")
+theme_override_font_sizes/font_size = 45
+text = "Score"
+
+[node name="lblScoreTime" type="Label" parent="Summary/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("1_lg6lf")
+theme_override_font_sizes/font_size = 35
+text = "Time %s"
+
+[node name="lblScoreCoins" type="Label" parent="Summary/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("1_lg6lf")
+theme_override_font_sizes/font_size = 35
+text = "Coins%s"
+
+[node name="lblScoreTotal" type="Label" parent="Summary/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("1_lg6lf")
+theme_override_font_sizes/font_size = 35
+text = "Total %s"
 
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="RankingButton" to="." method="_on_ranking_button_pressed"]

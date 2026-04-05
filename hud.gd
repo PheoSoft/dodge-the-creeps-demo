@@ -3,6 +3,11 @@ extends CanvasLayer
 
 signal start_game
 
+@onready var MsgTime = "Time %s"
+@onready var MsgCoins = "Coins %s"
+@onready var MsgTotal = "Total %s"
+
+
 func show_message(text):
 	$Message.text = text
 	$Message.show()
@@ -10,12 +15,15 @@ func show_message(text):
 
 func show_game_over():
 	show_message("Game Over")
+	show_ranking($ScoreLabel.text, $CoinLabel.text)
 	# Wait until the MessageTimer has counted down.
+	print("Before timer timeout")
 	await $MessageTimer.timeout
+	print("After timer timeout")
 	$Message.text = "Dodge the Creeps!"
 	$Message.show()
 	# Make a one-shot timer and wait for it to finish.
-	await get_tree().create_timer(1.0).timeout
+	#await get_tree().create_timer(2.0).timeout
 	$StartButton.show()
 	$RankingButton.show()
 
@@ -32,10 +40,12 @@ func _on_start_button_pressed():
 
 func _on_message_timer_timeout():
 	$Message.hide()
+	
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
+	#show_ranking(24,2)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -43,3 +53,12 @@ func _process(delta):
 
 func _on_ranking_button_pressed():
 	get_tree().change_scene_to_file("res://ranking_screen.tscn")
+
+func show_ranking(time, coins):
+	#msg = msg % [str(puntos)]
+	#$lblScore.text = msg
+	$Summary/VBoxContainer/lblScoreTime.text = MsgTime % str(time)
+	$Summary/VBoxContainer/lblScoreCoins.text = MsgCoins % (coins)
+	$Summary/VBoxContainer/lblScoreTotal.text = MsgTotal % str(int(time) + int(coins))
+	$Summary.visible = true
+	

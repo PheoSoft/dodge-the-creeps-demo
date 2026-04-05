@@ -1,5 +1,5 @@
 --TODO--
-Recuento de puntos
+Fix: El título no debería desaparecer después del game over.
 Añadir cuenta atrás al pulsar nuevo juego
 Modificadores
 Diversidad de movimiento de los enemigos
@@ -11,14 +11,18 @@ How to define a generic base scenes. To reuse it like in ranking or pause, confi
 Como hacer label o containers con/sin fondo y que sean translúcidos.
 
 --CHANGELOG--
+11/03/2024
+Se reforma un poco el código.
+Se Añade el recuento de puntos.
+09/03/2024
+Se añade pantalla de ranking (mockup)
+Se modifica la posición del player al cargar el juego
 07/03/2024
 - Solucionado bug aparición de monedas. No aparecían siempre porque la moneda(sprite2D)
 tenía una posición diferente a 0,0 con lo cual se salía de pantalla en ocasiones 
 - Fix: Cuando los mobs salían de escena no se destruían. Faltaba conectar la señal del VisibleOnScreen.
 - Fix: Ajustes de volumen
-09/03/2024
-Se añade pantalla de ranking (mockup)
-Se modifica la posición del player al cargar el juego
+
 
 Images sources:
 	
