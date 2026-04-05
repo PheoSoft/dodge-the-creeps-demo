@@ -7,12 +7,6 @@ signal start_game
 @onready var MsgCoins = "Coins %s"
 @onready var MsgTotal = "Total %s"
 
-
-func show_message(text):
-	$Message.text = text
-	$Message.show()
-	$MessageTimer.start()
-
 func show_game_over():
 	show_message("Game Over")
 	show_ranking($ScoreLabel.text, $CoinLabel.text)
@@ -26,6 +20,19 @@ func show_game_over():
 	#await get_tree().create_timer(2.0).timeout
 	$StartButton.show()
 	$RankingButton.show()
+
+func show_ranking(time, coins):
+	#msg = msg % [str(puntos)]
+	#$lblScore.text = msg
+	$Summary/VBoxContainer/lblScoreTime.text = MsgTime % str(time)
+	$Summary/VBoxContainer/lblScoreCoins.text = MsgCoins % (coins)
+	$Summary/VBoxContainer/lblScoreTotal.text = MsgTotal % str(int(time) + int(coins))
+	$Summary.visible = true
+
+func show_message(text):
+	$Message.text = text
+	$Message.show()
+	$MessageTimer.start()
 
 func update_score(score):
 	$ScoreLabel.text = str(score)
@@ -53,12 +60,3 @@ func _process(delta):
 
 func _on_ranking_button_pressed():
 	get_tree().change_scene_to_file("res://ranking_screen.tscn")
-
-func show_ranking(time, coins):
-	#msg = msg % [str(puntos)]
-	#$lblScore.text = msg
-	$Summary/VBoxContainer/lblScoreTime.text = MsgTime % str(time)
-	$Summary/VBoxContainer/lblScoreCoins.text = MsgCoins % (coins)
-	$Summary/VBoxContainer/lblScoreTotal.text = MsgTotal % str(int(time) + int(coins))
-	$Summary.visible = true
-	
