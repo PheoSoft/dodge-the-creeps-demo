@@ -17,6 +17,7 @@ func show_game_over():
 	# Make a one-shot timer and wait for it to finish.
 	await get_tree().create_timer(1.0).timeout
 	$StartButton.show()
+	$RankingButton.show()
 
 func update_score(score):
 	$ScoreLabel.text = str(score)
@@ -26,6 +27,7 @@ func update_coins(coins):
 
 func _on_start_button_pressed():
 	$StartButton.hide()
+	$RankingButton.hide()
 	start_game.emit()
 
 func _on_message_timer_timeout():
@@ -35,8 +37,9 @@ func _on_message_timer_timeout():
 func _ready():
 	pass # Replace with function body.
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
 
+func _on_ranking_button_pressed():
+	get_tree().change_scene_to_file("res://ranking_screen.tscn")

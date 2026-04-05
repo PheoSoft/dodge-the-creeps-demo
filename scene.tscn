@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://st7i6o3u1m0q"]
+
+[ext_resource type="Texture2D" uid="uid://c67k0ieteb4j8" path="res://art/Abstract-ranking.jpg" id="1_touol"]
+
+[node name="scene" type="Node2D"]
+
+[node name="background" type="Sprite2D" parent="."]
+modulate = Color(0.784314, 0.784314, 0.784314, 1)
+position = Vector2(235, 359)
+scale = Vector2(0.0817725, 0.172244)
+texture = ExtResource("1_touol")

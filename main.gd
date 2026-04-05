@@ -65,7 +65,7 @@ func _on_MobTimer_timeout():
 	
 func _ready():
 	#new_game()
-	pass
+	$Player.start($StartPosition.position)
 
 
 func _on_coin_timer_timeout():
