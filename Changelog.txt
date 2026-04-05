@@ -1,19 +1,22 @@
 --TODO--
-Fix: El título no debería desaparecer después del game over.
-Añadir cuenta atrás al pulsar nuevo juego
-Modificadores
+BUG: El título no debería desaparecer después del game over.
+Añadir cuenta atrás al pulsar nuevo juego y vida
+Modificadores: Pastillita del Pacman
 Diversidad de movimiento de los enemigos
 Rankings a disco
-Añadir vidas
+Recoger vida extra
 
 --To-Search--
 How to define a generic base scenes. To reuse it like in ranking or pause, config scenes. (Try create a scene and add it to the tree)
 Como hacer label o containers con/sin fondo y que sean translúcidos.
 
 --CHANGELOG--
+12/03/2024
+Se añaden vidas
 11/03/2024
 Se reforma un poco el código.
 Se Añade el recuento de puntos.
+Se modifica el rango de velocidad de los enemigos para que hay más diferencia.
 09/03/2024
 Se añade pantalla de ranking (mockup)
 Se modifica la posición del player al cargar el juego
@@ -25,6 +28,5 @@ tenía una posición diferente a 0,0 con lo cual se salía de pantalla en ocasio
 
 
 Images sources:
-	
-	Ranking
+	Ranking:
 	https://www.freepik.es/foto-gratis/fondo-pixeles-abstracto-colorido_30874153.htm#fromView=search&page=1&position=5&uuid=73d6c6a2-c09a-4048-84fb-f434b80c14e7

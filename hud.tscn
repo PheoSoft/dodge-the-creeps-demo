@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bmllgb1qka4mk"]
+[gd_scene load_steps=7 format=3 uid="uid://bmllgb1qka4mk"]
 
 [ext_resource type="Script" path="res://hud.gd" id="1_eg2br"]
 [ext_resource type="FontFile" uid="uid://be1wc48gsn0i7" path="res://fonts/Xolonium-Regular.ttf" id="1_lg6lf"]
 [ext_resource type="Texture2D" uid="uid://7wh6wmvqviav" path="res://art/coin.png" id="3_q4civ"]
+[ext_resource type="Texture2D" uid="uid://bg21mkms5q0u3" path="res://art/playerGrey_walk1.png" id="4_0vjm5"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_4iqqg"]
 action = &"start_game"
@@ -96,6 +97,16 @@ theme_override_font_sizes/font_size = 32
 text = "0"
 vertical_alignment = 3
 
+[node name="lblLifes" type="Label" parent="."]
+offset_left = 366.0
+offset_top = 6.0
+offset_right = 418.0
+offset_bottom = 64.0
+theme_override_fonts/font = ExtResource("1_lg6lf")
+theme_override_font_sizes/font_size = 32
+text = "2"
+vertical_alignment = 3
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(411, 25)
 scale = Vector2(2, 2)
@@ -145,6 +156,11 @@ size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("1_lg6lf")
 theme_override_font_sizes/font_size = 35
 text = "Total %s"
+
+[node name="PlayerGreyWalk1" type="Sprite2D" parent="."]
+position = Vector2(344, 24)
+scale = Vector2(0.222222, 0.222222)
+texture = ExtResource("4_0vjm5")
 
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="RankingButton" to="." method="_on_ranking_button_pressed"]

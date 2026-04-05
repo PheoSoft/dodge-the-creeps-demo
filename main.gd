@@ -8,35 +8,49 @@ extends Node
 
 var score = 0
 var monedas = 0
+@export_category("Config")
+@export var lifes: int = 2
 
 func _ready():
 	#new_game()
 	$Player.start($StartPosition.position)
 	$Player.coinpicked.connect(_on_player_coinpicked)
+	#$Player.hit.connect(_on_player_hit)
+	$HUD/lblLifes.text = str(lifes)
 
 func game_over():
 	$DeathSound.play()
+	stop_game()
+	$HUD.show_game_over()
+
+func stop_game():
 	$ScoreTimer.stop()
 	$MobTimer.stop()
 	$CoinTimer.stop()
 	$Music.stop()
-	$HUD.show_game_over()
 
-func new_game():
-	var player = get_node("Player")
+func restart_game():
 	get_tree().call_group("mobs", "queue_free")
 	get_tree().call_group("coins", "queue_free")
 	$Music.play()
+	$StartTimer.start()
+	restart_Player()
+	
+func new_game():
 	score = 0
 	monedas = 0
-	$Player.start($StartPosition.position)
-	$Player.set_process(true)
-	$StartTimer.start()
 	$HUD.update_score(score)
 	$HUD.show_message("Get Ready")
 	$HUD.update_coins(monedas)
 	$HUD/Summary.visible = false
+	restart_game()
+	
 
+func restart_Player():
+	var player = get_node("Player")
+	$Player.start($StartPosition.position)
+	$Player.set_process(true)
+	
 func _on_ScoreTimer_timeout():
 	score += 1
 	$HUD.update_score(score)
@@ -78,4 +92,14 @@ func _on_player_coinpicked(_moneda):
 	monedas += 1
 	$HUD.update_coins(monedas)
 	_moneda.free()
-	
+
+func _on_player_hit():
+	var remainingLifes = int($HUD/lblLifes.text)-1
+	$HUD/lblLifes.text = str(remainingLifes)
+	stop_game()
+	if (remainingLifes < 1):
+		game_over()
+	else:
+		$DeathSound.play()
+		await get_tree().create_timer(3).timeout
+		restart_game()

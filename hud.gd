@@ -11,9 +11,7 @@ func show_game_over():
 	show_message("Game Over")
 	show_ranking($ScoreLabel.text, $CoinLabel.text)
 	# Wait until the MessageTimer has counted down.
-	print("Before timer timeout")
 	await $MessageTimer.timeout
-	print("After timer timeout")
 	$Message.text = "Dodge the Creeps!"
 	$Message.show()
 	# Make a one-shot timer and wait for it to finish.
